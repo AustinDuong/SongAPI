@@ -1,0 +1,6 @@
+@SongAPI_HostAddress = http://localhost:5004
+
+GET {{SongAPI_HostAddress}}/songapi/
+Accept: application/json
+
+###
