@@ -84,7 +84,15 @@ namespace SongAPI.DAL.Repositories
 
         public async Task DeleteSong(int id)
         {
-            throw new NotImplementedException();
+            var dbSong = await _databaseContext.Songs.FindAsync(id);
+
+            if (dbSong == null)
+            {
+                throw new KeyNotFoundException("Song not found.");
+            }
+
+            _databaseContext.Songs.Remove(dbSong);
+            await _databaseContext.SaveChangesAsync();
         }
 
     }

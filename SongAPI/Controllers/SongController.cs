@@ -95,5 +95,23 @@ namespace SongAPI.Controllers
             }
         }
 
+        [HttpDelete("DeleteSong")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> DeleteSong(int id)
+        {
+            try
+            {
+                await _songService.DeleteSong(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                {
+                    _logger.LogError("Delete Song with ID: " + id + " failed.", ex);
+                    return BadRequest();
+                }
+            }
+        }
     }
 }
