@@ -57,6 +57,25 @@ namespace SongAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AddSong(Song song)
+        {
+            try
+            {
+                await _songService.AddSong(song);
+                return CreatedAtAction(nameof(GetSong), new { id = song.Id }, song);
+            }
+            catch (Exception ex)
+            {
+                {
+                    _logger.LogError("Add Song " + song + " failed.", ex);
+                    return NotFound();
+                }
+            }
+        }
+
 
     }
 }

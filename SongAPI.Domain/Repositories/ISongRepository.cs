@@ -12,7 +12,7 @@ namespace SongAPI.Domain.Repositories
         Task<List<Song>> GetAllSongs();
         Task<Song> GetSong(int id);
         Task AddSong(Song song);
-        void Update(Song song);
-        void Delete(int id);
+        Task UpdateSong(Song updatedSong);
+        Task DeleteSong(int id);
     }
 }

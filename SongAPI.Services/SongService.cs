@@ -26,17 +26,17 @@ namespace SongAPI.Services
             return _songRepository.GetSong(id);
         }
 
-        public Task AddSong(Song song)
+        public async Task AddSong(Song song)
+        {
+            await _songRepository.AddSong(song);
+        }
+
+        public Task UpdateSong(Song updatedSong)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(Song song)
+        public Task DeleteSong(int id)
         {
             throw new NotImplementedException();
         }
