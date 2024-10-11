@@ -19,7 +19,9 @@ namespace SongAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllSongs")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<List<Song>>> GetAllSongs()
         {
             try
@@ -35,5 +37,26 @@ namespace SongAPI.Controllers
                 }
             }
         }
+
+        [HttpGet("GetSong/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<Song>>> GetSong(int id)
+        {
+            try
+            {
+                var song = await _songService.GetSong(id);
+                return new OkObjectResult(song);
+            }
+            catch (Exception ex)
+            {
+                {
+                    _logger.LogError("Get Song with ID: " + id + " failed.", ex);
+                    return NotFound();
+                }
+            }
+        }
+
+
     }
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SongAPI.DAL.Repositories
 {
+    // This is where all of your database access should happen.
     public class SongRepository : ISongRepository
     {
         private readonly DatabaseContext _databaseContext;
@@ -19,7 +20,7 @@ namespace SongAPI.DAL.Repositories
             _databaseContext = databaseContext;
         }
 
-        public async Task<IEnumerable<Song>> GetAllSongs()
+        public async Task<List<Song>> GetAllSongs()
         {
             try
             {
@@ -32,7 +33,21 @@ namespace SongAPI.DAL.Repositories
 
         }
 
-        public Task<Song> GetSong(int id)
+        public async Task<Song> GetSong(int id)
+        {
+            try
+            {
+                Song songQuery = _databaseContext.Songs
+                    .Single(s => s.Id == id);
+                return songQuery;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Task AddSong(Song song)
         {
             throw new NotImplementedException();
         }
