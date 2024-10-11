@@ -31,9 +31,9 @@ namespace SongAPI.Services
             await _songRepository.AddSong(song);
         }
 
-        public Task UpdateSong(Song updatedSong)
+        public async Task UpdateSong(Song updatedSong)
         {
-            throw new NotImplementedException();
+            await _songRepository.UpdateSong(updatedSong);
         }
 
         public Task DeleteSong(int id)

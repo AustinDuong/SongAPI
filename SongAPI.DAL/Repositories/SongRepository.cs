@@ -67,7 +67,19 @@ namespace SongAPI.DAL.Repositories
 
         public async Task UpdateSong(Song updatedSong)
         {
-            throw new NotImplementedException();
+            var dbSong = await _databaseContext.Songs.FindAsync(updatedSong.Id);
+
+            if(dbSong == null)
+            {
+                throw new KeyNotFoundException("Song not found.");
+            }
+
+            dbSong.Title = updatedSong.Title;
+            dbSong.Artist = updatedSong.Artist;
+            dbSong.Year = updatedSong.Year;
+            dbSong.Album = updatedSong.Album;
+
+            await _databaseContext.SaveChangesAsync();
         }
 
         public async Task DeleteSong(int id)

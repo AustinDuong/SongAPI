@@ -57,7 +57,7 @@ namespace SongAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("AddSong")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AddSong(Song song)
@@ -71,11 +71,29 @@ namespace SongAPI.Controllers
             {
                 {
                     _logger.LogError("Add Song " + song + " failed.", ex);
-                    return NotFound();
+                    return BadRequest();
                 }
             }
         }
 
+        [HttpPut("UpdateSong")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> UpdateSong(Song updatedSong)
+        {
+            try
+            {
+                await _songService.UpdateSong(updatedSong);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                {
+                    _logger.LogError("Update Song " + updatedSong + " failed.", ex);
+                    return BadRequest();
+                }
+            }
+        }
 
     }
 }
