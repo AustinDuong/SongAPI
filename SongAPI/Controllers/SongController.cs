@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SongAPI.Domain.Services;
 
 using SongAPI.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SongAPI.Controllers
 {
@@ -60,6 +61,7 @@ namespace SongAPI.Controllers
         [HttpPost("AddSong")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize] // Authentication Required for modifying Data
         public async Task<ActionResult> AddSong(Song song)
         {
             try
@@ -79,6 +81,7 @@ namespace SongAPI.Controllers
         [HttpPut("UpdateSong")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize] // Authentication Required for modifying Data
         public async Task<ActionResult> UpdateSong(Song updatedSong)
         {
             try
@@ -98,6 +101,7 @@ namespace SongAPI.Controllers
         [HttpDelete("DeleteSong")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize] // Authentication Required for modifying Data
         public async Task<ActionResult> DeleteSong(int id)
         {
             try
